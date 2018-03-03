@@ -1,0 +1,13 @@
+name = Services china address field
+description = The services china address field module.
+package = Services
+core = 7.x
+dependencies[] = services
+dependencies[] = rest_server
+dependencies[] = china_address
+
+; Information added by Drupal.org packaging script on 2015-07-06
+version = "7.x-0.1"
+core = "7.x"
+project = "services_china_address_field"
+datestamp = "1421874484"

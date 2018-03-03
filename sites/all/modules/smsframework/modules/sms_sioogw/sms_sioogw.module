@@ -1,0 +1,379 @@
+<?php
+
+
+/**
+ * @file
+ * Development and testing tools for Drupal SMS Framework.
+ *
+ * @package sms
+ * @subpackage sms_sioogw
+ */
+/*
+
+/**
+ * Implements hook_gateway_info().
+ */
+function sms_sioogw_gateway_info() {
+  return array(
+    'sioogw' => array(
+      'name' => t('希奥通讯网关'),
+      'send' => 'sms_sioogw_send',
+      'configure form' => 'sms_sioogw_admin_form',
+      'send form' => 'sms_sioogw_send_form',
+      'validate number' => 'sms_sioogw_admin_form_validate_number',
+    ),
+  );
+}
+
+function sms_sioogw_admin_form($configuration) {
+  $configuration += array(
+    'sms_sioogw_user' => '',
+    'sms_sioogw_password' => '',
+    'server' => '',
+    'sms_sioogw_api' => '',
+  );
+  $form['sms_sioogw_user'] = array(
+    '#type' => 'textfield',
+    '#title' => t('User'),
+    '#description' => t('The username of your WINIC account.'),
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#default_value' => $configuration['sms_sioogw_user'],
+  );
+  $form['sms_sioogw_password'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Password'),
+    '#description' => t('The current password on your WINIC account.'),
+    '#size' => 20,
+    '#maxlength' => 20,
+    '#default_value' => $configuration['sms_sioogw_password'],
+  );
+  $form['server'] = array(
+    '#type' => 'textfield',
+    '#title' => t('API Server URL'),
+    '#description' => t('The url for accessing the Test api server.'),
+    '#size' => 40,
+    '#maxlength' => 255,
+    '#default_value' => $configuration['server'] ?: '',
+  );
+  // rest or soap
+  $api_options = array(
+    'rest' => t('REST'),
+  );
+  if (in_array('soap', get_loaded_extensions())) {
+    $api_options['soap'] = t('SOAP');
+  }
+  $form['sms_sioogw_api'] = array(
+    '#type' => 'select',
+    '#title' => t('Choose an API'),
+    '#description' => t(''),
+    '#multiple' => FALSE,
+    '#options' => $api_options,
+    '#default_value' => $configuration['sms_sioogw_api'],
+  );
+  return $form;
+}
+
+function sms_sioogw_admin_form_validate_number($number) {
+  $code = substr($number, 0, 3);
+  $errors = array();
+  if (preg_match('/[^0-9]/', $number)) {
+    $errors[] = t('Non-numeric character found in number.');
+  }
+  if (strlen($number) > 15 || strlen($number) < 10) {
+    $errors[] = t('Number longer than 15 digits or shorter than 10 digits.');
+  }
+  if ($code == '990' || $code == '997' || $code == '999') {
+    $errors[] = t('Country code not allowed');
+  }
+  return $errors;
+}
+
+/**
+ * Returns custom additions to be added to the send forms
+ */
+function sms_sioogw_send_form() {
+  $form = array();
+
+  return $form;
+}
+
+/**
+ * Callback for sending messages.
+ */
+function sms_sioogw_send($number, $message, $options) {
+  $data = array('mobile' => $number, 'msg' => $message);
+  // TODO: switch api
+  //_sms_sioogw_send_soap($data);
+  $result=_sms_sioogw_send_http($data);
+  return $result;
+}
+
+function _sms_sioogw_send_soap($data) {
+  // TODO: check user
+//  list($sioogw_user_status, $sioogw_user_info) = sms_sioogw_api_soap('GetUserInfo');
+//  if (!empty($sioogw_user_status)) {
+//    var_dump($sioogw_user_info);
+//  }
+//  elseif (!empty($sioogw_user_info)) {
+//    
+//  }
+//  else {
+//    
+//  }
+  
+  list($status, $message) = sms_sioogw_api_soap('SendMessages', $data);
+  if (!$status) {
+    drupal_set_message($message, 'error');
+  }
+  else {
+    // TODO
+    
+  }
+}
+
+/**
+ * APIs
+ */
+
+/**
+ * SOAP API
+ *
+ * @param $command
+ * @param $data
+ * @param $config
+ * @return result
+ */
+function sms_sioogw_api_soap($command, $data = array(), $config = NULL) {
+  if ($config == NULL) {
+    $gateway = sms_gateways('gateway', 'sioogw');
+    $config = $gateway['configuration'];
+  }
+  
+  $sioogw_url = $config['server'];
+  $sioogw_uid = $config['sms_sioogw_user'];
+  $sioogw_pwd = $config['sms_sioogw_password'];
+  $strmd5 = strtolower(md5($sioogw_pwd));
+  $pass_parameters = array(
+    'uid' => $sioogw_uid,
+    'auth' => $strmd5,
+  );
+  
+  // TODO: check soap
+  $soapclient = new SoapClient($sioogw_url);
+  
+  // TODO: check functions?
+//  $functions = $soapclient->__getFunctions();
+//  var_dump($functions);
+//  $types = $soapclient->__getTypes();
+//  var_dump($types);
+  
+  switch ($command) {
+    case 'GetUserInfo':
+      $response = $soapclient->GetUserInfo($pass_parameters);
+      // TODO: build return
+//      var_dump($response);
+      if (!empty($response->GetUserInfoResult)) {
+        $info_array = explode('/', $response->GetUserInfoResult);
+        
+        // TODO: check [0]
+        if ($info_array[0] != '000') {
+          return array(FALSE, $info_array[0]);
+        }
+        
+        $info_array = array_filter($info_array);
+        $info_keys = array('000', 'uid', 'credit', 'cost', 'lenth');
+        $info_array = array_combine($info_keys, $info_array);
+        
+        return array(TRUE, $info_array);
+      }
+      else {
+        return array(FALSE, FALSE);
+      }
+      
+      break;
+      
+    case 'SendMessages':
+      $parameters = array_merge(array(
+        'mobile' => '',
+        'msg' => '',
+        'otime' => '',
+      ), $pass_parameters, $data);
+      var_dump($parameters);
+      
+//      $response = $soapclient->SendMessages($parameters);
+//      var_dump($response);
+//      $result = (string)$response->SendMessagesResult;
+//      // TODO: build return
+//      $status_array = _sms_sioogw_soap_status();
+//      if (is_numeric($result) && $result >= 0) {
+//        if (array_key_exists($result, $status_array)) {
+//          return array(TRUE, $status_array[$result]);
+//        }
+//        else {
+//          return array(TRUE, $result);
+//        }
+//      }
+//      elseif (array_key_exists($result, $status_array)) {
+//        return array(FALSE, $status_array[$result]);
+//      }
+//      else {
+//        return array(FALSE, t('Unknown error'));
+//      }
+      
+      break;
+  }
+  
+  // TODO
+  return array(FALSE, FALSE);
+}
+
+function _sms_sioogw_soap_status() {
+  /*000或
+0808191630319344
+成功！
+-01
+当前账号余额不足！
+-02
+当前用户ID错误！
+-03
+当前密码错误！
+-04
+参数不够或参数内容的类型错误！
+-05
+手机号码格式不对！
+-06
+短信内容编码不对！
+-07
+短信内容含有敏感字符！
+-08
+无接收数据
+-09
+系统维护中..
+-10
+手机号码数量超长！ 
+-11
+短信内容超长！（70个字符）
+-12
+其它错误！
+-13
+文件传输错误
+  */
+  return array(
+    '000' => t('Success'),
+    '-01' => t('Not enough credit'),
+    '-02' => t('Wrong user ID'),
+    '-03' => t('Wrong user password'),
+    '-04' => t('Wrong arguments'),
+    '-05' => t('Wrong phone number'),
+    '-06' => t('Wrong text encoding'),
+    '-07' => t('Bad sms text'),
+    '-08' => t('No data'),
+    '-09' => t('System under maintenance'),
+    '-10' => t('Too many phone numbers'),
+    '-11' => t('Too long sms text'),
+    '-12' => t('Other Error'),
+    '-13' => t('Failed transfer file')
+  );
+}
+
+function _sms_sioogw_send_http($data) {
+  // TODO: check user
+//  list($sioogw_user_status, $sioogw_user_info) = sms_sioogw_api_soap('GetUserInfo');
+//  if (!empty($sioogw_user_status)) {
+//    var_dump($sioogw_user_info);
+//  }
+//  elseif (!empty($sioogw_user_info)) {
+//    
+//  }
+//  else {
+//    
+//  }
+  
+  $result = sms_sioogw_api_http('SendMessages', $data);
+  return $result;
+}
+
+/**
+ * REST (HTTP) API
+ *
+ * @param $command
+ * @param $data
+ * @param $config
+ * @return result
+ */
+function sms_sioogw_api_http($command, $data = array(), $config = NULL) {
+  if ($config == NULL) {
+    $gateway = sms_gateways('gateway', 'sioogw');
+    $config = $gateway['configuration'];
+  }
+  
+  $sioogw_url = $config['server'];
+  $sioogw_uid = $config['sms_sioogw_user'];
+  $sioogw_pwd = $config['sms_sioogw_password'];
+  $strmd5 = strtolower(md5($sioogw_pwd));
+
+  $query = 'uid='. $sioogw_uid
+          .'&auth='. $strmd5
+          .'&mobile='. $data['mobile']
+          .'&msg='. drupal_encode_path($data['msg'])
+          .'&expid=0'
+          .'&encode=utf-8';
+  // TODO
+  //drupal_set_message($sioogw_url.'?'. $query);
+  
+  // Run the command
+  $result = drupal_http_request($sioogw_url.'?'. $query);
+  // foreach ($result as $key => $value) {
+  //   drupal_set_message($key.'=>'.$value);
+  // }
+  $response = explode(',', $result->data);
+  $siooerror=sms_sioogw_error_codes();
+  $resmsg=$siooerror[$response[0]];
+  // TODO: build return
+  // Check for HTTP errors
+  if ($result->code!=200 && $result->error) {
+    //drupal_set_message(t('An error occured during the HTTP request: '. $result->error), 'error');
+    return array('status'=>FALSE, 'message'=>$result->error);
+  }elseif ($response[0]=='0') {
+    if(count($response)>1){
+      return array('status'=>TRUE, 'message'=>$resmsg.$response[1]);
+    }else{
+      return array('status'=>TRUE, 'message'=>$resmsg);
+    }
+  }else{
+    if(count($response)>1){
+      return array('status'=>FALSE, 'message'=>$resmsg.$response[1]);
+    }else{
+      return array('status'=>FALSE, 'message'=>$resmsg);
+    }
+  }
+}
+
+function sms_sioogw_error_codes() {
+  return array(
+    '0' => "操作成功",
+    '-1' => "签权失败",
+    '-2' => "未检索到被叫号码",
+    '-3' => "被叫号码过多",
+    '-4' => "内容未签名",
+    '-5' => "内容过长",
+    '-6' => "余额不足",
+    '-7' => "暂停发送",
+    '-8' => "保留",
+    '-9' => "定时发送时间格式错误",
+    '-10' => "下发内容为空",
+    '-11' => "账户无效",
+    '-12' => "Ip地址非法",
+    '-13' => "操作频率快",
+    '-14' => "操作失败",
+    '-15' => "拓展码无效",
+    '-16' => "取消定时,seqid错误",
+    '-17' => "未开通报告",
+    '-18' => "暂留",
+    '-19' => "未开通上行",
+    '-20' => "暂留",
+    '-21' => "包含屏蔽词",
+  );
+}
+

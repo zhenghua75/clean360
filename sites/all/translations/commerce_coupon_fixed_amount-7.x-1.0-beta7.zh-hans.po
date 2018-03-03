@@ -1,0 +1,20 @@
+# Chinese, Simplified translation of Commerce coupon fixed amount (7.x-1.0-beta7)
+# Copyright (c) 2014 by the Chinese, Simplified translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Commerce coupon fixed amount (7.x-1.0-beta7)\n"
+"POT-Creation-Date: 2014-09-25 09:38+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Chinese, Simplified\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "Commerce Coupon"
+msgstr "Commerce 优惠券"
+msgid "Fixed Amount"
+msgstr "固定金额优惠券"
+msgid "Sorry, you can only apply a coupon once per order."
+msgstr "不好意思，每个订单只能使用一次优惠券。"

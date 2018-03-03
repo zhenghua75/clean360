@@ -1,0 +1,80 @@
+/* This file will hold styles that are loaded using the same media query as the normal grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the widescreen layout unless they are overridden by the widescreen styles. */
+
+
+
+#block-views-exp-display-products-page {
+  height: 80px;
+}
+#block-views-exp-display-products-page .block-inner,
+#block-views-exp-display-products-page .block-inner .content,
+#block-views-exp-display-products-page .block-inner #views-exposed-form-display-products-page,
+#block-views-exp-display-products-page .views-submit-button,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext div{
+  height: 80px;
+}
+#block-menu-menu-hotsearch{
+  height: 65px;
+}
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext .form-text {
+  bottom: -43px;
+}
+#block-views-exp-display-products-page .views-submit-button .form-submit{
+  margin-top: -57px;
+}
+#zone-fullbar-wrapper #zone-fullbar .prom-bar1{
+	margin-left: 40px;
+}
+.page-products .view-display-products ul.all-products li.views-row{
+	margin:0 13px 26px 13px;
+	padding:0;
+}
+.view-allproductnew .view-content .item-list li.views-row,
+.view-allprodpromotion .view-content .views-row,
+.view-collection-products .view-content .item-list .products-per-collection li.views-row,
+.view-collection-taxonomy-term .view-content .item-list .products-per-collection li.views-row,
+.view-category-products .view-content .views-row,
+.view-brand-products .view-content .views-row{
+	margin:0 6px 12px 6px;
+	padding:0;
+}
+.page-user-login .panel-2col .panel-col-first{
+  display: block;
+}
+.page-user-login .panel-2col .panel-col-last{
+  width: 50%;
+}
+.front .grid-4#region-sidebar-first{
+  width: 160px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.front #region-sidebar-first .view-hotproduct .views-row {
+  height: 145px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .field-name-field-images img{
+  height: 145px;
+  float: left;
+  position: relative;
+  top:0px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .views-field-title{
+  float: left;
+  position: relative;
+  top:-140px;
+  z-index: 100;
+  font-size: 13px;
+}
+#block-views-demo-content-slideshow-block-1 .event-slider .views-field-nothing {
+  background-size: 270px 75px;
+  width: 270px;}
+#block-views-demo-content-slideshow-block-1 .bx-prev,
+#block-views-demo-content-slideshow-block-1 .bx-prev:hover {
+  background-size: 250px 75px;
+  margin-left: 0;}
+#block-views-demo-content-slideshow-block-1 .bx-next,
+#block-views-demo-content-slideshow-block-1 .bx-next:hover {
+  background-size: 250px 75px;
+  margin-right: 0;}

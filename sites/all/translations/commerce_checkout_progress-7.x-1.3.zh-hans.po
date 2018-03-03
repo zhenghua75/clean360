@@ -1,0 +1,26 @@
+# Chinese, Simplified translation of Commerce Checkout Progress (7.x-1.3)
+# Copyright (c) 2014 by the Chinese, Simplified translation team
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Commerce Checkout Progress (7.x-1.3)\n"
+"POT-Creation-Date: 2014-08-28 06:14+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Language-Team: Chinese, Simplified\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+msgid "List type"
+msgstr "列表类型"
+msgid "Cart"
+msgstr "购物车"
+msgid "Show block on specific pages"
+msgstr "在特定页面里显示区块"
+msgid "Ordered list"
+msgstr "有序列表"
+msgid "Unordered list"
+msgstr "无序列表"
+msgid "Commerce (contrib)"
+msgstr "电子商务（贡献）"

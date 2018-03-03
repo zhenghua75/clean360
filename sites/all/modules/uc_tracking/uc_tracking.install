@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Module to provide themed package tracking information.
+ *
+ * @author Tim Rohaly.    <http://drupal.org/user/202830>
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function uc_tracking_install() {
+  // Because we are redefining the uc_order menu user/#/orders,
+  // we need to ensure this module gets loaded AFTER uc_order
+  $weight = db_query('SELECT weight FROM {system} WHERE name = :name', array(':name' => 'uc_order'))->fetchField();
+  db_update('system')
+    ->fields(array(
+      'weight' => $weight + 1
+    ))
+    ->condition('name', 'uc_tracking')
+    ->execute();
+}

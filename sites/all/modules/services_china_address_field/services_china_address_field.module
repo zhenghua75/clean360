@@ -1,0 +1,10 @@
+<?php
+
+function services_china_address_field_ctools_plugin_api($owner, $api) {
+  if ($owner == 'services' && $api == 'services') {
+    return array(
+      'version' => 3,
+      'file' => 'services_china_address_field.services.inc'
+    );
+  }
+}

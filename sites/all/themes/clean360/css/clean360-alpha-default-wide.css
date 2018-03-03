@@ -1,0 +1,88 @@
+/* This file will hold styles that are loaded using the same media query as the wide grid. */
+
+#block-views-exp-display-products-page {
+  height: 80px;
+}
+#block-views-exp-display-products-page .block-inner,
+#block-views-exp-display-products-page .block-inner .content,
+#block-views-exp-display-products-page .block-inner #views-exposed-form-display-products-page,
+#block-views-exp-display-products-page .views-submit-button,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext div{
+  height: 80px;
+}
+#block-menu-menu-hotsearch{
+  height: 65px;
+}
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext .form-text {
+  bottom: -43px;
+}
+#block-views-exp-display-products-page .views-submit-button .form-submit{
+  margin-top: -57px;
+}
+#zone-fullbar-wrapper #zone-fullbar .prom-bar1{
+	margin-left: 100px;
+}
+.page-products .view-display-products ul.all-products li.views-row{
+	margin:0 16px 16px 0;
+	padding:0;
+}
+.page-products .view-display-products ul.all-products li:nth-child(4n) {
+	padding-right: 0;
+	margin-right: 0;
+ }
+.page-products .view-display-products ul.all-products li:nth-child(3n) {
+	padding-right: 0;
+	margin-right: 0 16px 16px 0;
+ }
+.view-allproductnew,
+.view-allprodpromotion,
+.view-collection-products ul.products-per-collection,
+.view-category-products,
+.view-brand-products{
+  margin-left: 55px;
+}
+.view-allproductnew .view-content .item-list li.views-row,
+.view-allprodpromotion .view-content .views-row,
+.view-collection-products .view-content .item-list .products-per-collection li.views-row,
+.view-collection-taxonomy-term .view-content .item-list .products-per-collection li.views-row,
+.view-category-products .view-content .views-row,
+.view-brand-products .view-content .views-row{
+  width: 250px;
+  margin:0 20px 20px 0;
+}
+.page-user-login .panel-2col .panel-col-first{
+  display: block;
+}
+.page-user-login .panel-2col .panel-col-last{
+  width: 50%;
+}
+.front .grid-4#region-sidebar-first{
+  width: 200px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.front #region-sidebar-first .view-hotproduct .views-row {
+  height: 175px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .field-name-field-images img{
+  height: 175px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .views-field-title{
+  float: left;
+  position: relative;
+  top:-170px;
+  z-index: 100;
+  font-size: 14px;
+}
+#block-views-demo-content-slideshow-block-1 .event-slider .views-field-nothing {
+  background-size: 340px 75px;
+  width: 340px;}
+#block-views-demo-content-slideshow-block-1 .bx-prev,
+#block-views-demo-content-slideshow-block-1 .bx-prev:hover {
+  background-size: 300px 75px;
+  margin-left: 20px;}
+#block-views-demo-content-slideshow-block-1 .bx-next,
+#block-views-demo-content-slideshow-block-1 .bx-next:hover {
+  background-size: 300px 75px;
+  margin-right: 20px;}

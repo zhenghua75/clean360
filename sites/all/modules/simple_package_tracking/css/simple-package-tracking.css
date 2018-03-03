@@ -1,0 +1,39 @@
+#edit-tracking-url { min-width: 600px; }
+
+.form-item-tracking-carrier label,
+.form-item-tracking-number label,
+.form-item-tracking-note label,
+.simple-package-tracking-numbers-label{
+	width: 100px !important;float:left;height: 25px;}
+.simple-package-tracking-form,
+.form-item-tracking-carrier,
+.form-item-tracking-number,
+.form-item-tracking-note,
+.form-item-do-tracking-actions{
+	width: 100% !important;
+	float: left;}
+
+.form-item-tracking-number input,
+.form-item-tracking-note input{
+	float: left;
+	height: 25px !important;
+}
+.form-item-tracking-carrier select{
+	clear: none !important;
+	float: left;
+	width: 200px;
+}
+.form-item-tracking-carrier .description{
+	float: left;
+	width: 100%;
+}
+.simple-package-tracking-form .form-type-checkbox {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.simple-package-tracking-form .description{
+	margin-left: 0 !important;
+}
+.form-item-tracking-note input.form-text{
+	width: 70%;
+}

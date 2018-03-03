@@ -1,0 +1,13 @@
+name = Services Commerce Customer Profile
+description = The services Commerce Customer Profile module.
+package = Services
+core = 7.x
+dependencies[] = commerce
+dependencies[] = services
+dependencies[] = rest_server
+
+; Information added by Drupal.org packaging script on 2015-07-06
+version = "7.x-0.1"
+core = "7.x"
+project = "services_commerce_customer_profile"
+datestamp = "1421874484"

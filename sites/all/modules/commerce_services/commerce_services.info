@@ -1,0 +1,12 @@
+name = Commerce Services
+description = Defines Services resources for Drupal Commerce entities and systems.
+package = Services
+dependencies[] = entity
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2014-04-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "commerce_services"
+datestamp = "1398386628"
+

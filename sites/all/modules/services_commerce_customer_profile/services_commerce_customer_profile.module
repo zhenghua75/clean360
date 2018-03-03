@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function services_commerce_customer_profile_ctools_plugin_api($owner, $api) {
+  if ($owner == 'services' && $api == 'services') {
+    return array(
+      'version' => 3,
+      'file' => 'services_commerce_customer_profile.services.inc'
+    );
+  }
+}
+
+function services_commerce_customer_profile_services_request_postprocess_alter($controller, $args, &$result) {
+  if ($controller['callback'] == '_system_resource_connect') {
+    $result->field_info_instances['commerce_customer_profile'] = field_info_instances('commerce_customer_profile');
+  }
+}
+

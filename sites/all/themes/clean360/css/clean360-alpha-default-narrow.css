@@ -1,0 +1,62 @@
+/* This file will hold styles that are loaded using the same media query as the narrow grid. */
+/* If you are using the default media queries provided by Omega, these styles will also
+ *  apply to the normal and widescreen layouts. You may override these styles in the normal 
+ *  and widescreen CSS files as appropriate. */
+
+#block-views-exp-display-products-page {
+  height: 50px;
+}
+#block-views-exp-display-products-page .block-inner,
+#block-views-exp-display-products-page .block-inner .content,
+#block-views-exp-display-products-page .block-inner #views-exposed-form-display-products-page,
+#block-views-exp-display-products-page .views-submit-button,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext,
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext div{
+  height: 50px;
+}
+#block-menu-menu-hotsearch{
+  height: 50px;
+}
+#block-views-exp-display-products-page .views-widget-filter-search_api_views_fulltext .form-text {
+  bottom: -15px;
+}
+#block-views-exp-display-products-page .views-submit-button .form-submit{
+  margin-top: -57px;
+}
+#zone-fullbar-wrapper #zone-fullbar .prom-bar1{
+	margin-left: 0;
+}
+.page-products .view-display-products ul.all-products li.views-row{
+	margin:0 13px 26px 13px;
+	padding:0;
+}
+.view-allproductnew .view-content .item-list li.views-row,
+.view-allprodpromotion .view-content .views-row,
+.view-collection-products .view-content .item-list .products-per-collection li.views-row,
+.view-collection-taxonomy-term .view-content .item-list .products-per-collection li.views-row,
+.view-category-products .view-content .views-row,
+.view-brand-products .view-content .views-row{
+	margin:0 5px 10px 5px;
+	padding:0;
+}
+.page-user-login .panel-2col .panel-col-last{
+  width: 100%;
+}
+.front .grid-4#region-sidebar-first{
+  width: 140px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.front #region-sidebar-first .view-hotproduct .views-row{
+  height: 92px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .field-name-field-images img{
+  height: 90px;
+}
+.front #region-sidebar-first .view-hotproduct .views-row .views-field-title{
+  float: left;
+  position: relative;
+  top:-90px;
+  z-index: 100;
+  font-size: 12px;
+}
